@@ -1,0 +1,9 @@
+﻿.idea/.idea.Pvz/.idea
+Assets/Settings
+Library
+Logs
+obj
+Temp
+ProjectSettings
+UserSettings
+*.csproj
