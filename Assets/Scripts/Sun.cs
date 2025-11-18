@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeaBullet : MonoBehaviour
+public class Sun : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Vector3 direction;
-    public float speed = 5f;
+    public float duration;
+    private float _timer;
     
     void Start()
     {
-        
+        _timer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        _timer += Time.deltaTime;
+        if (_timer > duration)
+        {
+            Destroy(gameObject);
+        }
     }
 }

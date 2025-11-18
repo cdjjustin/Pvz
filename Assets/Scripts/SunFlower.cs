@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SunFlower : MonoBehaviour
+{
+    // Start is called before the first frame update
+    private Animator _animator;
+    public float readyTime;
+    private float _timer;
+    
+    public GameObject sunPrefab;
+    private int _sunCount;
+    
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _timer = 0;
+        _sunCount = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        _timer += Time.deltaTime;
+        if (_timer > readyTime)
+        {
+            _animator.SetBool("Ready", true);
+        }
+    }
+
+    public void SpawnSun()
+    {
+        _sunCount++;
+        var randomOffsetX = _sunCount % 2 > 0
+            ? Random.Range(transform.position.x - 1f, transform.position.x - 0.5f)
+            : Random.Range(transform.position.x + 0.5f, transform.position.x + 1f);
+        var randomOffsetY = Random.Range(transform.position.y - 0.3f, transform.position.y + 0.5f);
+        
+        var newSun = Instantiate(sunPrefab);
+        newSun.transform.position = new Vector3(randomOffsetX, randomOffsetY, 0);
+        _timer = 0;
+        _animator.SetBool("Ready", false);
+    }
+}
