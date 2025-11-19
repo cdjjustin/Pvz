@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class SunFlower : MonoBehaviour
+public class SunFlower : PlantBase
 {
     // Start is called before the first frame update
     private Animator _animator;
@@ -17,6 +18,7 @@ public class SunFlower : MonoBehaviour
         _animator = GetComponent<Animator>();
         _timer = 0;
         _sunCount = 0;
+        Init();
     }
 
     // Update is called once per frame

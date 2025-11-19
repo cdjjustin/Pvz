@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class Peashooter : MonoBehaviour
+public class Peashooter : PlantBase
 {
     // Start is called before the first frame update
     public float intervel = 2f;
@@ -12,7 +13,7 @@ public class Peashooter : MonoBehaviour
     
     void Start()
     {
-        
+        Init();
     }
 
     // Update is called once per frame
