@@ -168,6 +168,7 @@ MonoBehaviour:
   objectPrefab: {fileID: 7377786591518738551, guid: 1466e30804155fd46a40719565dc82f3, type: 3}
   darkBg: {fileID: 4681626969776567014}
   progressBar: {fileID: 8473189116871696766}
+  icon: {fileID: 21300000, guid: 7ac7b0263bdc0394a97039b3de325168, type: 3}
   coolDownTime: 2
   sunCost: 50
 --- !u!1 &8473189116871696766

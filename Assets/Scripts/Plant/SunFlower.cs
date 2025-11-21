@@ -37,7 +37,7 @@ public class SunFlower : PlantBase
         var randomOffsetY = Random.Range(transform.position.y - 0.3f, transform.position.y + 0.5f);
         
         var newSun = Instantiate(sunPrefab);
-        newSun.transform.position = new Vector3(randomOffsetX, randomOffsetY, 0);
+        newSun.transform.position = new Vector3(randomOffsetX, randomOffsetY, -.1f);
         _timer = 0;
         _animator.SetBool("Ready", false);
     }

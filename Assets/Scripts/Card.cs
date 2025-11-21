@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +9,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     
     public GameObject darkBg;
     public GameObject progressBar;
+    public Sprite icon;
     public float coolDownTime;
     public int sunCost;
 
@@ -61,7 +60,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             
         if(_clonedObject == null)
         {
-            _clonedObject = Instantiate(objectPrefab);
+            _clonedObject = new GameObject("PlantSprite");
+            var spriteRenderer = _clonedObject.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = icon;
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f); //半透明效果
+            spriteRenderer.sortingLayerName = "Plant";
             _clonedObject.transform.position = TranslateScreenToWorld(eventData.position);
         }
     }
@@ -86,9 +89,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             if (c.CompareTag("land") && c.transform.childCount == 0)
             {
-                _clonedObject.transform.SetParent(c.transform);
-                _clonedObject.transform.localPosition = Vector3.zero;
+                var newPlant = Instantiate(objectPrefab);
+                newPlant.transform.SetParent(c.transform);
+                newPlant.transform.localPosition = Vector3.zero;
 
+                Destroy(_clonedObject);
                 _clonedObject = null;
                 _timer = 0;
                 

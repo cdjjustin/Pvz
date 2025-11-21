@@ -14,5 +14,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SunManager.Instance.AddSun(initSunCount);     
+        ZombieManager.Instance.CreateZombie();
     }
 }
