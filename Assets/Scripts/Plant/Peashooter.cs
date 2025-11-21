@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
 public class Peashooter : PlantBase
 {
     // Start is called before the first frame update
     public float intervel = 2f;
-    public float timer;
+    private float _timer;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     
@@ -19,10 +18,10 @@ public class Peashooter : PlantBase
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= intervel)
+        _timer += Time.deltaTime;
+        if(_timer >= intervel)
         {
-            timer = 0f;
+            _timer = 0f;
             Shoot();
         }
     }

@@ -22,4 +22,10 @@ public class Sun : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    void OnMouseDown()
+    {
+        SunManager.Instance.AddSun(25);
+        Destroy(gameObject);
+    }
 }

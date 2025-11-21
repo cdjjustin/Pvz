@@ -15,6 +15,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public int sunCost;
 
     private float _timer;
+    
+    private bool _isCanDrag => SunManager.Instance.TotalSun >= sunCost && _timer >= coolDownTime;
 
     // Start is called before the first frame update
     void Start()
@@ -26,19 +28,21 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > coolDownTime)
-        {
-            if (SunManager.Instance.TotalSun >= sunCost)
-            {
-                darkBg.SetActive(false);
-            }
+        UpdateDarkBg();
+        UpdateProgressBar();
+    }
 
-            progressBar.SetActive(false);
-        }
-        else
+    private void UpdateDarkBg()
+    {
+        darkBg.SetActive(!_isCanDrag);
+    }
+
+    private void UpdateProgressBar()
+    {
+        var isCd = _timer < coolDownTime;
+        progressBar.SetActive(isCd);
+        if (isCd)
         {
-            darkBg.SetActive(true);
-            progressBar.SetActive(true);
             float ratio = 1 - Mathf.Clamp01(_timer / coolDownTime);
             progressBar.GetComponent<Image>().fillAmount = ratio;
         }
@@ -52,6 +56,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if(!_isCanDrag)
+            return;
+            
         if(_clonedObject == null)
         {
             _clonedObject = Instantiate(objectPrefab);
@@ -61,7 +68,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(_clonedObject == null)
+        if(_clonedObject == null || !_isCanDrag)
             return;
         
         _clonedObject.transform.position = TranslateScreenToWorld(eventData.position);
@@ -69,7 +76,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_clonedObject == null)
+        if (_clonedObject == null || !_isCanDrag)
         {
             return;
         }
@@ -83,6 +90,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 _clonedObject.transform.localPosition = Vector3.zero;
 
                 _clonedObject = null;
+                _timer = 0;
                 
                 SunManager.Instance.SpendSun(sunCost);
                 break;

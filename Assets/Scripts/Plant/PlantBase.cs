@@ -1,17 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+public class PlantBase : CommonBase, IHelth
 {
-    public class PlantBase : CommonBase, IHelth
+    public virtual void ChangeHealth(float num)
     {
-        public virtual void ChangeHealth(float num)
+        currentHealth = Mathf.Clamp(currentHealth + num, 0, maxHealth);
+        if(currentHealth <= 0)
         {
-            currentHealth = Mathf.Clamp(currentHealth + num, 0, maxHealth);
-            if(currentHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 }
