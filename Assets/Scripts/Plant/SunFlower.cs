@@ -3,19 +3,17 @@ using UnityEngine;
 public class SunFlower : PlantBase
 {
     // Start is called before the first frame update
-    private Animator _animator;
     public float readyTime;
     private float _timer;
     
     public GameObject sunPrefab;
     private int _sunCount;
-    
-    void Start()
+
+    public override void Start()
     {
-        _animator = GetComponent<Animator>();
+        base.Start();
         _timer = 0;
         _sunCount = 0;
-        Init();
     }
 
     // Update is called once per frame
@@ -24,7 +22,7 @@ public class SunFlower : PlantBase
         _timer += Time.deltaTime;
         if (_timer > readyTime)
         {
-            _animator.SetBool("Ready", true);
+            animator?.SetBool("Ready", true);
         }
     }
 
@@ -39,6 +37,6 @@ public class SunFlower : PlantBase
         var newSun = Instantiate(sunPrefab);
         newSun.transform.position = new Vector3(randomOffsetX, randomOffsetY, -.1f);
         _timer = 0;
-        _animator.SetBool("Ready", false);
+        animator?.SetBool("Ready", false);
     }
 }

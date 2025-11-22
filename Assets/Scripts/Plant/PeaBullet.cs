@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PeaBullet : MonoBehaviour
@@ -9,10 +6,6 @@ public class PeaBullet : MonoBehaviour
     public Vector3 direction;
     public float speed = 5f;
     public float damage = 1f;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

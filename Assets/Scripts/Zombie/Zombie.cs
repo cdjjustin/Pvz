@@ -6,7 +6,6 @@ public class Zombie : ZombieBase
     public float speed = .1f;
     
     private bool _isWalking;
-    private Animator _animator;
     
     public float damage = 1f;
     public float damageInterval = 2f;
@@ -18,15 +17,13 @@ public class Zombie : ZombieBase
     private bool _isDied;
     
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         _isWalking = true;
         _isLostHead = false;
-        _animator = GetComponent<Animator>();
         _isDied = false;
         _headPrefab = gameObject.transform.Find("head").gameObject;
-        
-        Init();
     }
 
     // Update is called once per frame
@@ -55,7 +52,7 @@ public class Zombie : ZombieBase
         {
             _isWalking = false;
             _damageTimer = 0f;
-            _animator.SetBool("Walk", _isWalking);
+            animator?.SetBool("Walk", _isWalking);
         }
     }
 
@@ -84,7 +81,7 @@ public class Zombie : ZombieBase
         if (other.CompareTag("Plant"))
         {
             _isWalking = true;
-            _animator.SetBool("Walk", _isWalking);
+            animator?.SetBool("Walk", _isWalking);
         }
     }
 
@@ -94,14 +91,14 @@ public class Zombie : ZombieBase
         if (currentHealth <= 0 && !_isDied)
         {
             _isDied = true;
-            _animator.SetTrigger("Die");
+            animator?.SetTrigger("Die");
             return;
         }
         
         if (currentHealth <= headLostHealth && !_isLostHead)
         {
             _isLostHead = true;
-            _animator.SetBool("LostHead", _isLostHead);
+            animator?.SetBool("LostHead", _isLostHead);
             _headPrefab.SetActive(true);
         }
     }

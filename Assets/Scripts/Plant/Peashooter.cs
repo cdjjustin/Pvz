@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Peashooter : PlantBase
@@ -9,11 +7,6 @@ public class Peashooter : PlantBase
     private float _timer;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
-    
-    void Start()
-    {
-        Init();
-    }
 
     // Update is called once per frame
     void Update()
