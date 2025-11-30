@@ -105,6 +105,7 @@ public class Zombie : ZombieBase
     
     public void Die()
     {
+        ZombieManager.Instance.RemoveZombie(gameObject);
         Destroy(gameObject);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        ConfigManager.Load();
         SunManager.Instance.AddSun(initSunCount);     
         ZombieManager.Instance.CreateZombie();
     }
